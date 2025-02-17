@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+    <link rel="icon" type="image/png" href="calclogo.png">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: grey;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 320px;
+            background-color: black;
+            padding: 20px;
+            border-radius: 30px;
+            border: 5px solid white;
+            box-shadow: 10px 10px 20px rgba(50, 50, 50, 0.8);
+        }   
+        .input {
+            grid-column: span 4;
+            background-color: black;
+            color: white;
+            text-align: right;
+            font-size: 40px;
+            padding: 10px;
+            border: none;
+            outline: none;
+            width: 100%;
+        }
+        .button {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        .gray { background-color: #a5a5a5; color: black; }
+        .orange { background-color: #ff9500; color: white; }
+        .dark { background-color: #333; color: white; }
+        .zero {
+            grid-column: span 2;
+            width: 150px;
+            border-radius: 35px;
+            text-align: left;
+            padding-left: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input id="userinput" class="input" type="text" value="0" disabled>
+        <button class="button gray" onclick="clearInput()">AC</button>
+        <button class="button gray" onclick="appendInput('%')">%</button>
+        <button class="button gray" onclick="deleteLast()">⌫</button>
+        <button class="button orange" onclick="appendInput('/')">÷</button>
+        <button class="button dark" onclick="appendInput('7')">7</button>
+        <button class="button dark" onclick="appendInput('8')">8</button>
+        <button class="button dark" onclick="appendInput('9')">9</button>
+        <button class="button orange" onclick="appendInput('*')">×</button>
+        <button class="button dark" onclick="appendInput('4')">4</button>
+        <button class="button dark" onclick="appendInput('5')">5</button>
+        <button class="button dark" onclick="appendInput('6')">6</button>
+        <button class="button orange" onclick="appendInput('-')">−</button>
+        <button class="button dark" onclick="appendInput('1')">1</button>
+        <button class="button dark" onclick="appendInput('2')">2</button>
+        <button class="button dark" onclick="appendInput('3')">3</button>
+        <button class="button orange" onclick="appendInput('+')">+</button>
+        <button class="button dark zero" onclick="appendInput('0')">0</button>
+        <button class="button dark" onclick="appendInput('.')">.</button>
+        <button class="button orange" onclick="calculateResult()">=</button>
+    </div>
+    <script>
+        let userinput = document.getElementById('userinput');
+        function appendInput(value) {
+            if (userinput.value === '0' && value !== '.') {
+                userinput.value = value;
+            } else {
+                userinput.value += value;
+            }
+        }
+        function clearInput() {
+            userinput.value = '0';
+        }
+        function deleteLast() {
+            userinput.value = userinput.value.slice(0, -1) || '0';
+        }
+        function calculateResult() {
+            try {
+                userinput.value = eval(userinput.value.replace('%', '/100'));
+            } catch {
+                userinput.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>

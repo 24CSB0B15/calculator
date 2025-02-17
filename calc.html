@@ -78,25 +78,27 @@
         <button class="button orange" onclick="calculateResult()">=</button>
     </div>
     <script>
-        let userinput = document.getElementById('userinput');
-        function appendInput(value) {
-            if (userinput.value === '0' && value !== '.') {
+        let userinput=document.getElementById('userinput');
+        function appendInput(value){
+            if(userinput.value==='0'&&value!=='.'){
                 userinput.value = value;
-            } else {
+            }
+            else{
                 userinput.value += value;
             }
         }
-        function clearInput() {
-            userinput.value = '0';
+        function clearInput(){
+            userinput.value='0';
         }
-        function deleteLast() {
-            userinput.value = userinput.value.slice(0, -1) || '0';
+        function deleteLast(){
+            userinput.value=userinput.value.slice(0, -1)||'0';
         }
-        function calculateResult() {
-            try {
-                userinput.value = eval(userinput.value.replace('%', '/100'));
-            } catch {
-                userinput.value = 'Error';
+        function calculateResult(){
+            try{
+                userinput.value=eval(userinput.value.replace('%', '/100'));
+            }
+            catch{
+                userinput.value='Error';
             }
         }
     </script>
